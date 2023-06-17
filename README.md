@@ -1,6 +1,15 @@
 # Linked list
-## The code
+
+## Create the list
+
+```JS
+
+const list = new LinkedList();
+
+```
+
 ### The node class
+
 ```JS
 
 class Node {
@@ -13,6 +22,7 @@ class Node {
 ```
 
 ### The linked list class
+
 ```JS
 
 class LinkedList {
@@ -29,6 +39,7 @@ class LinkedList {
 ### The linked list class methods description
 
 `append(value)` - appends value to the end of the list
+
 ```JS
 
 append(value) {
@@ -46,6 +57,7 @@ append(value) {
 ```
 
 `prepend(value)` - prepends value to the start of the list
+
 ```JS
 
   prepend(value) {
@@ -55,25 +67,39 @@ append(value) {
     }
     this.size++;
   }
-  
+
 ```
+
 `getSize()` - returns size of the list
+
 ```JS
   getSize() {
     return this.size;
   }
 ```
-`getHead()` - returns head of the list or null
+
+`getHead()` - returns head of the list or null if empty
+
 ```JS
   getHead() {
     return this.head;
   }
 ```
+
+`getTail()` - returns tail of the list or null if empty
+
 ```JS
   getTail() {
     return this.tail;
   }
 ```
+
+`at(index)` - returns:
+
+- A node at the specified index
+- The first node if the index not specified
+- Throw an exception if the index negative or less then the size of the list
+
 ```JS
   at(index) {
     if (index < 0 || index >= this.size) {
@@ -89,6 +115,12 @@ append(value) {
     return temp;
   }
 ```
+
+`pop()`:
+
+- Removes and returns the last node
+- Return null if empty
+
 ```JS
   pop() {
     if (this.isEmpty()) {
@@ -113,6 +145,12 @@ append(value) {
     return poppedNode;
   }
 ```
+
+`shift()`:
+
+- Removes and returns the first node
+- Return null if empty
+
 ```JS
   shift() {
     if (this.isEmpty()) {
@@ -130,6 +168,9 @@ append(value) {
     return shiftedNode;
   }
 ```
+
+`contains(value)` - Returns true if a value in the list, and false otherwise
+
 ```JS
 contains(value) {
     let temp = this.head;
@@ -144,6 +185,9 @@ contains(value) {
     return false;
   }
 ```
+
+`find(value)` - If a node with the value exist returns the node index, and null otherwise
+
 ```JS
   find(value) {
     let temp = this.head;
@@ -161,6 +205,8 @@ contains(value) {
   }
 ```
 
+`toString()` - Returns stringified version of the list
+
 ```JS
 toString() {
     let temp = this.head;
@@ -174,6 +220,13 @@ toString() {
     return string + "null";
   }
 ```
+
+`insertAt(value, index)`:
+
+- Inserts a value at the index
+- If the index not specified prepends the value;
+- Throw an exception if the index negative or less then the size of the list
+
 ```JS
 insertAt(value, index = 0) {
     if (index < 0 || index > this.size) {
@@ -196,6 +249,13 @@ insertAt(value, index = 0) {
     this.size++;
   }
 ```
+
+`insertAt(index)`:
+
+- Removes the value at the index
+- If the index not specified removes the first value;
+- Throw an exception if the index negative or less then the size of the list
+
 ```JS
 removeAt(index = 0) {
     if (index < 0 || index >= this.size) {
@@ -217,22 +277,11 @@ removeAt(index = 0) {
     this.size--;
   }
 ```
+
+`insertAt(index)` - Checks if the list is empty
+
 ```JS
 isEmpty() {
     return this.head === null;
   }
 ```
-
-## For testing
-
-```JS
-
-//add how i use the code, test it from third point
-
-```
-
-- `name(n)` - description
-
-//look at the code understand it
-//look at others code, try to understand it
-//use what i made, check for bugs
