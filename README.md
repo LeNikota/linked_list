@@ -1,6 +1,6 @@
 # Linked list
-
 ## The code
+### The node class
 ```JS
 
 class Node {
@@ -10,24 +10,43 @@ class Node {
   }
 }
 
+```
+
+### The linked list class
+```JS
+
 class LinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
+  constructor(value = null, next = null) {
+    this.value = value;
+    this.next = next;
   }
 
-  append(value) {
-    const newNode = new Node(value);
-    if (this.isEmpty()) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
-    }
-    this.size++;
+  /* Methods */
+}
+
+```
+
+### The linked list class methods description
+
+`append(value)` - appends value to the end of the list
+```JS
+
+append(value) {
+  const newNode = new Node(value);
+  if (this.isEmpty()) {
+    this.head = newNode;
+    this.tail = newNode;
+  } else {
+    this.tail.next = newNode;
+    this.tail = newNode;
   }
+  this.size++;
+}
+
+```
+
+`prepend(value)` - prepends value to the start of the list
+```JS
 
   prepend(value) {
     this.head = new Node(value, this.head);
@@ -36,19 +55,26 @@ class LinkedList {
     }
     this.size++;
   }
-
+  
+```
+`getSize()` - returns size of the list
+```JS
   getSize() {
     return this.size;
   }
-
+```
+`getHead()` - returns head of the list or null
+```JS
   getHead() {
     return this.head;
   }
-
+```
+```JS
   getTail() {
     return this.tail;
   }
-
+```
+```JS
   at(index) {
     if (index < 0 || index >= this.size) {
       throw new Error("Invalid index");
@@ -62,7 +88,8 @@ class LinkedList {
 
     return temp;
   }
-
+```
+```JS
   pop() {
     if (this.isEmpty()) {
       return null;
@@ -85,7 +112,8 @@ class LinkedList {
     this.size--;
     return poppedNode;
   }
-
+```
+```JS
   shift() {
     if (this.isEmpty()) {
       return null;
@@ -101,8 +129,9 @@ class LinkedList {
     this.size--;
     return shiftedNode;
   }
-
-  contains(value) {
+```
+```JS
+contains(value) {
     let temp = this.head;
 
     while (temp !== null) {
@@ -114,7 +143,8 @@ class LinkedList {
 
     return false;
   }
-
+```
+```JS
   find(value) {
     let temp = this.head;
     let index = 0;
@@ -129,8 +159,10 @@ class LinkedList {
 
     return null;
   }
+```
 
-  toString() {
+```JS
+toString() {
     let temp = this.head;
     let string = "";
 
@@ -141,8 +173,9 @@ class LinkedList {
 
     return string + "null";
   }
-
-  insertAt(value, index = 0) {
+```
+```JS
+insertAt(value, index = 0) {
     if (index < 0 || index > this.size) {
       throw new Error("Invalid index");
     }
@@ -162,8 +195,9 @@ class LinkedList {
     previousNode.next = newNode;
     this.size++;
   }
-
-  removeAt(index = 0) {
+```
+```JS
+removeAt(index = 0) {
     if (index < 0 || index >= this.size) {
       throw new Error("Invalid index");
     }
@@ -182,10 +216,23 @@ class LinkedList {
 
     this.size--;
   }
-
-  isEmpty() {
+```
+```JS
+isEmpty() {
     return this.head === null;
   }
-}
+```
+
+## For testing
+
+```JS
+
+//add how i use the code, test it from third point
 
 ```
+
+- `name(n)` - description
+
+//look at the code understand it
+//look at others code, try to understand it
+//use what i made, check for bugs
