@@ -11,16 +11,13 @@ class LinkedList {
   }
 
   append(value) {
+    const newNode = new Node(value);
     if (this.isEmpty()) {
-      this.head = new Node(value);
-      return;
+      this.head = newNode;
+    } else {
+      const tail = this.getTail();
+      tail.next = newNode;
     }
-
-    let temp = this.head;
-    while (temp.next != null) {
-      temp = temp.next;
-    }
-    temp.next = new Node(value);
   }
 
   prepend(value) {
@@ -63,12 +60,12 @@ class LinkedList {
   }
 
   pop() {
-    if(this.isEmpty()) return null;
-    if(this.head.next == null) { // has only one node
+    if (this.isEmpty()) return null;
+    if (this.head.next == null) {
       const poppedNode = this.head;
       this.head = null;
       return poppedNode;
-    } 
+    }
 
     let current = this.head;
     let previous = null;
@@ -78,14 +75,13 @@ class LinkedList {
       previous = current;
       current = current.next;
     }
-
     poppedNode = current;
     previous.next = null;
     return poppedNode;
   }
 
   shift() {
-    if(this.isEmpty()) return null;
+    if (this.isEmpty()) return null;
 
     let shiftedNode = this.head;
 
@@ -124,7 +120,7 @@ class LinkedList {
       string += `(${temp.value}) -> `;
       temp = temp.next;
     }
-    return (string += "null");
+    return string += "null";
   }
 
   insertAt(value, index) {
@@ -181,11 +177,11 @@ class LinkedList {
 
 const list = new LinkedList();
 
-list.append(3)
-list.prepend(5)
-list.prepend(33)
-list.append('last')
-list.prepend('first')
+list.append(3);
+list.prepend(5);
+list.prepend(33);
+list.append("last");
+list.prepend("first");
 console.log(list.toString());
 
 console.log("The list size is", list.size());
@@ -197,13 +193,12 @@ console.log(list.getTail());
 console.log(list.shift());
 console.log(list.getHead());
 console.log(list.contains());
-console.log(list.find('last'));
+console.log(list.find("last"));
 console.log(list.at(3));
 console.log(list.isEmpty(3));
-list.insertAt('lol',1)
-list.removeAt(1)
+list.insertAt("lol", 1);
+list.removeAt(1);
 console.log("List is: " + list.toString());
-
 
 //is there any bugs in the code
 //can i optimize this
