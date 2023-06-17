@@ -250,7 +250,7 @@ insertAt(value, index = 0) {
   }
 ```
 
-`insertAt(index)`:
+`removeAt(index)`:
 
 - Removes the value at the index
 - If the index not specified removes the first value;
@@ -278,7 +278,7 @@ removeAt(index = 0) {
   }
 ```
 
-`insertAt(index)` - Checks if the list is empty
+`isEmpty()` - Checks if the list is empty
 
 ```JS
 isEmpty() {
