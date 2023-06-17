@@ -187,7 +187,64 @@ class LinkedList {
 
 
 
+
+
+
+
+
+
+
+
+
+
 const list = new LinkedList();
 
-list.append(3)
-console.log(list.at())
+// append(value)
+list.append(3);
+list.append(7);
+list.append(11);
+console.log(list.toString()); // Output: (3) -> (7) -> (11) -> null
+
+// prepend(value)
+list.prepend(1);
+list.prepend(2);
+console.log(list.toString()); // Output: (2) -> (1) -> (3) -> (7) -> (11) -> null
+
+// getSize()
+console.log(list.getSize()); // Output: 5
+
+// getHead()
+console.log(list.getHead()); // Output: Node { value: 2, next: Node { value: 1, next: [Node] } }
+
+// getTail()
+console.log(list.getTail()); // Output: Node { value: 11, next: null }
+
+// at(index)
+console.log(list.at(2)); // Output: Node { value: 3, next: Node { value: 7, next: [Node] } }
+
+// pop()
+console.log(list.pop()); // Output: Node { value: 11, next: null }
+console.log(list.toString()); // Output: (2) -> (1) -> (3) -> (7) -> null
+
+// shift()
+console.log(list.shift()); // Output: Node { value: 2, next: [Node] }
+console.log(list.toString()); // Output: (1) -> (3) -> (7) -> null
+
+// contains(value)
+console.log(list.contains(3)); // Output: true
+console.log(list.contains(5)); // Output: false
+
+// find(value)
+console.log(list.find(7)); // Output: 2
+console.log(list.find(5)); // Output: null
+
+// insertAt(value, index)
+list.insertAt(5, 1);
+console.log(list.toString()); // Output: (1) -> (5) -> (3) -> (7) -> null
+
+// removeAt(index)
+list.removeAt(2);
+console.log(list.toString()); // Output: (1) -> (5) -> (7) -> null
+
+// isEmpty()
+console.log(list.isEmpty()); // Output: false\

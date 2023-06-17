@@ -1,13 +1,5 @@
 # Linked list
 
-### Create the list
-
-```JS
-
-const list = new LinkedList();
-
-```
-
 ### The node class
 
 ```JS
@@ -39,7 +31,7 @@ class LinkedList {
 
 ### The linked list class methods description
 
-`append(value)` - appends value to the end of the list
+`append(value)` - appends a value to the end of the list end of the list
 
 ```JS
 
@@ -57,7 +49,7 @@ append(value) {
 
 ```
 
-`prepend(value)` - prepends value to the start of the list
+`prepend(value)` - prepends a value to the start of the list
 
 ```JS
 
@@ -95,11 +87,11 @@ append(value) {
   }
 ```
 
-`at(index)` - returns:
+`at(index)`:
 
-- A node at the specified index
+- Returns the node at the specified index
 - The first node if the index not specified
-- Throw an exception if the index negative or less then the size of the list
+- Throw an exception if the index negative or bigger or equal to the size of the list
 
 ```JS
   at(index) {
@@ -119,7 +111,7 @@ append(value) {
 
 `pop()`:
 
-- Removes and returns the last node
+- Removes and returns the last node in the list
 - Return null if empty
 
 ```JS
@@ -149,7 +141,7 @@ append(value) {
 
 `shift()`:
 
-- Removes and returns the first node
+- Removes and returns the first node in the list
 - Return null if empty
 
 ```JS
@@ -226,7 +218,7 @@ toString() {
 
 - Inserts a value at the index
 - If the index not specified prepends the value;
-- Throw an exception if the index negative or less then the size of the list
+- Throw an exception if the index negative or bigger then the size of the list
 
 ```JS
 insertAt(value, index = 0) {
@@ -255,7 +247,7 @@ insertAt(value, index = 0) {
 
 - Removes the value at the index
 - If the index not specified removes the first value;
-- Throw an exception if the index negative or less then the size of the list
+- Throw an exception if the index negative or bigger or equal to the size of the list
 
 ```JS
 removeAt(index = 0) {
@@ -285,4 +277,62 @@ removeAt(index = 0) {
 isEmpty() {
     return this.head === null;
   }
+```
+
+### Try yourself
+
+```JS
+
+const list = new LinkedList();
+
+// append(value)
+list.append(3);
+list.append(7);
+list.append(11);
+console.log(list.toString()); // Output: (3) -> (7) -> (11) -> null
+
+// prepend(value)
+list.prepend(1);
+list.prepend(2);
+console.log(list.toString()); // Output: (2) -> (1) -> (3) -> (7) -> (11) -> null
+
+// getSize()
+console.log(list.getSize()); // Output: 5
+
+// getHead()
+console.log(list.getHead()); // Output: Node { value: 2, next: Node { value: 1, next: [Node] } }
+
+// getTail()
+console.log(list.getTail()); // Output: Node { value: 11, next: null }
+
+// at(index)
+console.log(list.at(2)); // Output: Node { value: 3, next: Node { value: 7, next: [Node] } }
+
+// pop()
+console.log(list.pop()); // Output: Node { value: 11, next: null }
+console.log(list.toString()); // Output: (2) -> (1) -> (3) -> (7) -> null
+
+// shift()
+console.log(list.shift()); // Output: Node { value: 2, next: [Node] }
+console.log(list.toString()); // Output: (1) -> (3) -> (7) -> null
+
+// contains(value)
+console.log(list.contains(3)); // Output: true
+console.log(list.contains(5)); // Output: false
+
+// find(value)
+console.log(list.find(7)); // Output: 2
+console.log(list.find(5)); // Output: null
+
+// insertAt(value, index)
+list.insertAt(5, 1);
+console.log(list.toString()); // Output: (1) -> (5) -> (3) -> (7) -> null
+
+// removeAt(index)
+list.removeAt(2);
+console.log(list.toString()); // Output: (1) -> (5) -> (7) -> null
+
+// isEmpty()
+console.log(list.isEmpty()); // Output: false
+
 ```
