@@ -1,38 +1,39 @@
 class Node {
-  constructor(value, next) {
-    this.value = value || null;
-    this.next = next || null;
+  constructor(value = null, next = null) {
+    this.value = value;
+    this.next = next;
   }
 }
 
 class LinkedList {
   constructor() {
     this.head = null;
+    this.tail = null;
+    this.size = 0;
   }
 
   append(value) {
     const newNode = new Node(value);
     if (this.isEmpty()) {
       this.head = newNode;
+      this.tail = newNode;
     } else {
-      const tail = this.getTail();
-      tail.next = newNode;
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
+    this.size++;
   }
 
   prepend(value) {
-    this.head = this.isEmpty() ? new Node(value) : new Node(value, this.head);
+    this.head = new Node(value, this.head);
+    if (this.isEmpty()) {
+      this.tail = this.head;
+    }
+    this.size++;
   }
 
-  size() {
-    let counter = 0;
-    let temp = this.head;
-
-    while (temp != null) {
-      temp = temp.next;
-      counter++;
-    }
-    return counter;
+  getSize() {
+    return this.size;
   }
 
   getHead() {
@@ -40,62 +41,72 @@ class LinkedList {
   }
 
   getTail() {
-    if (this.isEmpty()) return null;
-    let temp = this.head;
-
-    while (temp.next != null) temp = temp.next;
-    return temp;
+    return this.tail;
   }
 
   at(index) {
+    if (index < 0 || index >= this.size) {
+      throw new Error("Invalid index");
+    }
+
     let temp = this.head;
 
     for (let i = 0; i < index; i++) {
-      if (temp == null) {
-        return "There is no item at this index";
-      }
       temp = temp.next;
     }
+
     return temp;
   }
 
   pop() {
-    if (this.isEmpty()) return null;
-    if (this.head.next == null) {
-      const poppedNode = this.head;
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    let poppedNode = this.tail;
+
+    if (this.head === this.tail) {
       this.head = null;
-      return poppedNode;
+      this.tail = null;
+    } else {
+      let current = this.head;
+      while (current.next !== this.tail) {
+        current = current.next;
+      }
+      current.next = null;
+      this.tail = current;
     }
 
-    let current = this.head;
-    let previous = null;
-    let poppedNode;
-
-    while (current.next != null) {
-      previous = current;
-      current = current.next;
-    }
-    poppedNode = current;
-    previous.next = null;
+    this.size--;
     return poppedNode;
   }
 
   shift() {
-    if (this.isEmpty()) return null;
+    if (this.isEmpty()) {
+      return null;
+    }
 
     let shiftedNode = this.head;
-
     this.head = this.head.next;
+
+    if (this.isEmpty()) {
+      this.tail = null;
+    }
+
+    this.size--;
     return shiftedNode;
   }
 
   contains(value) {
     let temp = this.head;
 
-    while (temp != null) {
-      if (value === temp.value) return true;
+    while (temp !== null) {
+      if (temp.value === value) {
+        return true;
+      }
       temp = temp.next;
     }
+
     return false;
   }
 
@@ -103,8 +114,10 @@ class LinkedList {
     let temp = this.head;
     let index = 0;
 
-    while (temp != null) {
-      if (temp.value === value) return index;
+    while (temp !== null) {
+      if (temp.value === value) {
+        return index;
+      }
       temp = temp.next;
       index++;
     }
@@ -116,89 +129,62 @@ class LinkedList {
     let temp = this.head;
     let string = "";
 
-    while (temp != null) {
+    while (temp !== null) {
       string += `(${temp.value}) -> `;
       temp = temp.next;
     }
-    return string += "null";
+
+    return string + "null";
   }
 
-  insertAt(value, index) {
-    if (this.isEmpty()) {
-      this.head = new Node(value, this.head);
-      return;
+  insertAt(value, index = 0) {
+    if (index < 0 || index > this.size) {
+      throw new Error("Invalid index");
     }
-    if (index == null || index == 0) {
-      this.head = new Node(value, this.head);
+
+    if (index === 0) {
+      this.prepend(value);
       return;
     }
 
-    let current = this.head;
-    let previous = null;
-
-    for (let i = 0; i < index; i++) {
-      if (current.next == null) {
-        current.next = new Node(value);
-        return;
-      }
-      previous = current;
-      current = current.next;
+    if (index === this.size) {
+      this.append(value);
+      return;
     }
-    previous.next = new Node(value, current);
+
+    const previousNode = this.at(index - 1);
+    const newNode = new Node(value, previousNode.next);
+    previousNode.next = newNode;
+    this.size++;
   }
 
-  removeAt(index) {
-    if (this.isEmpty()) {
-      return;
+  removeAt(index = 0) {
+    if (index < 0 || index >= this.size) {
+      throw new Error("Invalid index");
     }
-    if (index == null || index == 0) {
-      this.head = this.head.next;
+
+    if (index === 0) {
+      this.shift();
       return;
     }
 
-    let current = this.head;
-    let previous = null;
+    const previousNode = this.at(index - 1);
+    previousNode.next = previousNode.next.next;
 
-    for (let i = 0; i < index; i++) {
-      if (current.next == null) {
-        previous.next = null;
-        return;
-      }
-      previous = current;
-      current = current.next;
+    if (index === this.size - 1) {
+      this.tail = previousNode;
     }
-    previous.next = current.next;
+
+    this.size--;
   }
 
   isEmpty() {
-    return this.head == null;
+    return this.head === null;
   }
 }
 
+
+
+
+
 const list = new LinkedList();
-
-list.append(3);
-list.prepend(5);
-list.prepend(33);
-list.append("last");
-list.prepend("first");
-console.log(list.toString());
-
-console.log("The list size is", list.size());
-console.log(list.getHead());
-console.log(list.getTail());
-console.log(list.at(3));
-console.log(list.pop());
-console.log(list.getTail());
-console.log(list.shift());
-console.log(list.getHead());
-console.log(list.contains());
-console.log(list.find("last"));
-console.log(list.at(3));
-console.log(list.isEmpty(3));
-list.insertAt("lol", 1);
-list.removeAt(1);
-console.log("List is: " + list.toString());
-
-//is there any bugs in the code
-//can i optimize this
