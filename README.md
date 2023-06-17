@@ -26,9 +26,10 @@ class Node {
 ```JS
 
 class LinkedList {
-  constructor(value = null, next = null) {
-    this.value = value;
-    this.next = next;
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
   }
 
   /* Methods */
