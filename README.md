@@ -1,6 +1,6 @@
 # Linked list
 
-## Create the list
+### Create the list
 
 ```JS
 
